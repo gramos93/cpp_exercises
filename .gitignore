@@ -3,7 +3,7 @@ exe_2_6
 Chapter_3/x_and_y.dat
 Chapter_3/exe_3_1
 Chapter_3/exe_3_2
-.vscode/settings.json
+.vscode/
 Chapter_3/exe_3_3
 Chapter_4/exe_4_1
 Chapter_4/exe_4_3
@@ -13,3 +13,6 @@ Chapter_5/exe_5_1
 Chapter_5/exe_5_2
 Chapter_5/exe_5_4
 Chapter_5/exe_5_5
+Chapter_5/exe_5_6
+Chapter_5/exe_5_8
+Chapter_5/.vscode/settings.json
