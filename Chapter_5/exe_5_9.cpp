@@ -1,10 +1,13 @@
+// This file contains execise 5.9 and 5.10.
+
 #include <iostream>
 #include <memory>
 
 double** AllocateMatrixMemory(int numRows, int numCols);
 void FreeMatrixMemory(int numRows, double** matrix);
+void PrintMatrix(double** M, int numRows, int numCols);
+void PivotMatrix(double** A, double** b, int numRows, int numCols);
 double** GaussianElim(double** A, double** b, int numRows, int numCols);
-// TODO: Change Multiply to account a vector as the second argument.
 
 int main(int ergc, char* argv[])
 {   
@@ -26,19 +29,57 @@ int main(int ergc, char* argv[])
     }
     // Assures the matrix is non-singular.
     A[0][0] = A[2][2]= 1;
+    std::cout << "Original A matrix: " << std::endl;
+    PrintMatrix(A, rows, cols);
+
+    PivotMatrix(A, b, rows, cols);
+    std::cout << "Pivoted A matrix: " << std::endl;
+    PrintMatrix(A, rows, cols);
 
     u = GaussianElim(A, b, rows, cols);
-
-    for (int i = 0; i < rows; i++)
-    {
-        printf("u[%i] = %f\n", i, u[i][0]);
-    }
+    std::cout << "Resultant u vector: " << std::endl;
+    PrintMatrix(u, rows, 1);
 
     FreeMatrixMemory(rows, A);
     FreeMatrixMemory(rows, b);
     FreeMatrixMemory(rows, u);
 
     return 0;
+}
+
+void PivotMatrix(double** A, double** b, int numRows, int numCols)
+{
+    double tmp_A;
+    double tmp_b;
+    int idx;
+
+    for (int i = 0; i < (numRows - 1); i++)
+    {
+        idx = i;
+        
+        for (int k = i + 1; k < numRows; k++)
+        {
+            if (A[idx][i] < A[k][i])
+            {
+                idx = k;
+            }
+        }
+        if (idx != i)
+        {   
+            // std::cout << "Pivoting row " << i << " with row " << idx << std::endl;
+            // Swap A[i] row with A[idx] row
+            for (int j = 0; j < numCols; j++)
+            {
+                tmp_A = A[idx][j];
+                A[idx][j] = A[i][j];
+                A[i][j] = tmp_A;
+            }
+            // Swap b[i] with b[idx]
+            tmp_b = b[idx][0];
+            b[idx][0] = b[i][0];
+            b[i][0] = tmp_b;
+        }
+    }
 }
 
 double** GaussianElim(double** A, double** b, int numRows, int numCols)
@@ -50,8 +91,8 @@ double** GaussianElim(double** A, double** b, int numRows, int numCols)
     ******* The matrix A must be non-singular and A[0][0] != 0.0 ******* 
     --------------------------------------------------------------------
     params.
-        - A       : Matrix A (m x n)
-        - b       : Venctor b (m x 1)
+        - A       : Matrix A (m x n) !! This matrix is being changed inplace !!
+        - b       : Venctor b (m x 1) !! This vector is being changed inplace !!
         - numRows : Number of rows.
         - numCols : Number of cols.
     output.
@@ -136,4 +177,17 @@ void FreeMatrixMemory(int numRows, double** matrix)
         delete[] matrix[i];
     }
     delete[] matrix;
+}
+
+void PrintMatrix(double** M, int numRows, int numCols)
+{
+    for (int i = 0; i < numRows; i++)
+    {
+        for (int j = 0; j < numCols; j++)
+        {
+            printf("%f ", M[i][j]);
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
 }
