@@ -49,6 +49,18 @@ int main(int ergc, char* argv[])
 
 void PivotMatrix(double** A, double** b, int numRows, int numCols)
 {
+    /*
+    This function pivot the rows of a matrix and the related vector for later
+    use with the GaussianElim function for solving a linear nxn system.
+    --------------------------------------------------------------------
+    params.
+        - A       : Matrix A (m x n) !! This matrix is being changed inplace !!
+        - b       : Venctor b (m x 1) !! This vector is being changed inplace !!
+        - numRows : Number of rows.
+        - numCols : Number of cols.
+    output.
+        - None.
+    */
     double tmp_A;
     double tmp_b;
     int idx;
@@ -181,6 +193,9 @@ void FreeMatrixMemory(int numRows, double** matrix)
 
 void PrintMatrix(double** M, int numRows, int numCols)
 {
+    /*
+    This function prints a matrix in a formated form.
+    */
     for (int i = 0; i < numRows; i++)
     {
         for (int j = 0; j < numCols; j++)
