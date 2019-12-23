@@ -57,7 +57,6 @@ double CalculateDet(double** A, int m, int n)
         {
             for (int j = 0; j < n; j++)
             {
-                // std::cout << "\nAllocating memory for sub-matrix.\n";
                 double** B = AllocateMatrixMemory(m-1, n-1);
 
                 // Construct B skipping the row and column being calculated.
