@@ -38,7 +38,7 @@ double ComplexNumber::GetRealPart() const
 
 // Method for getting the imaginary part of a 
 // complex number
-double ComplexNumber::GetRealPart() const
+double ComplexNumber::GetImaginaryPart() const
 {
    return mImaginaryPart;
 }
@@ -71,6 +71,23 @@ ComplexNumber ComplexNumber::CalculatePower(double n) const
    double imag_part = mod_of_result*sin(arg_of_result);
    ComplexNumber z(real_part, imag_part); 
    return z; 
+}
+
+// Method for calculating the conjugate of a
+// complex number
+ComplexNumber ComplexNumber::CalculateConjugate() const
+{
+  ComplexNumber w; 
+  w.mRealPart = mRealPart;
+  w.mImaginaryPart = -mImaginaryPart;
+  
+  return w;
+}
+
+// Sets the complex number to it's conjugate.
+void ComplexNumber::SetConjugate()
+{
+   mImaginaryPart = -mImaginaryPart;
 }
 
 // Overloading the = (assignment) operator
@@ -111,6 +128,24 @@ ComplexNumber ComplexNumber::
    return w;
 }
 
+// Overloading the binary + operator
+ComplexNumber ComplexNumber::
+              operator*(const ComplexNumber& z) const
+{
+   ComplexNumber w;
+   w.mRealPart = (mRealPart * z.mRealPart) - (mImaginaryPart * z.mImaginaryPart);
+   w.mImaginaryPart = mRealPart * z.mImaginaryPart + z.mRealPart * mImaginaryPart;
+   return w;
+}
+
+ComplexNumber ComplexNumber::operator/(const int& z) const
+{
+   ComplexNumber w;
+   w.mRealPart = mRealPart / z;
+   w.mImaginaryPart = mImaginaryPart / z;
+   return w;
+}
+
 // Overloading the insertion << operator
 std::ostream& operator<<(std::ostream& output, 
                          const ComplexNumber& z)
@@ -143,21 +178,5 @@ double ImaginaryPart(const ComplexNumber& z)
 {
    return z.mImaginaryPart;
 } 
-
-// Method for calculating the conjugate of a
-// complex number
-ComplexNumber ComplexNumber::CalculateConjugate() const
-{
-  ComplexNumber w; 
-  w.mRealPart = mRealPart;
-  w.mImaginaryPart = -mImaginaryPart;
-  
-  return w;
-}
-// Sets the complex number to it's conjugate.
-void ComplexNumber::SetConjugate()
-{
-   mImaginaryPart = -mImaginaryPart;
-}
 
 //Code from Chapter06.tex line 986 save as ComplexNumber.cpp
