@@ -138,7 +138,16 @@ ComplexNumber ComplexNumber::
    return w;
 }
 
-ComplexNumber ComplexNumber::operator/(const int& z) const
+ComplexNumber ComplexNumber::
+              operator*(const double& z) const
+{
+   ComplexNumber w;
+   w.mRealPart = mRealPart * z;
+   w.mImaginaryPart = mImaginaryPart * z;
+   return w;
+}
+
+ComplexNumber ComplexNumber::operator/(const double& z) const
 {
    ComplexNumber w;
    w.mRealPart = mRealPart / z;
