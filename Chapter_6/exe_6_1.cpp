@@ -1,6 +1,5 @@
 #include <iostream>
 #include <memory>
-#include <cassert>
 #include "ComplexNumber.cpp"
 
 ComplexNumber** AllocateMatrixMemory(int numRows, int numCols);
