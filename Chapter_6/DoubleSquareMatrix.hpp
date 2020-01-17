@@ -7,8 +7,8 @@ class DoubleSquareMatrix
 {
     private:
     // Class is a 2x2, no need for a rows and cols def.
-        double mNumRows;
-        double mNumCols;
+        int mNumRows = 2;
+        int mNumCols = 2;
         double** matrix;
 
     public:
@@ -30,9 +30,9 @@ class DoubleSquareMatrix
         DoubleSquareMatrix operator-(const DoubleSquareMatrix& z) const;
         DoubleSquareMatrix operator*(const double& x) const;
         
-        double& operator[](int idx);
+        //double& operator[](int idx);
 
-        void FreeMatrixMemory(int numRows, DoubleSquareMatrix);
+    friend void FreeMatrixMemory(DoubleSquareMatrix& z);
 };
 
 #endif
