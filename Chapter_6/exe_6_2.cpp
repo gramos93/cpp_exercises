@@ -3,7 +3,7 @@
 
 void TestMatrixInvertion(DoubleSquareMatrix z);
 void TestOperators(DoubleSquareMatrix z);
-
+    
 int main()
 {
     // Main function for testing the DoubleSquareMatrix class.
